@@ -6,6 +6,8 @@ import com.example.monolitna.dto.response.FuelTypeResponse;
 import com.example.monolitna.entity.FuelType;
 import com.example.monolitna.repository.IFuelTypeRepository;
 import com.example.monolitna.services.IFuelTypeService;
+import com.example.monolitna.soap.CarClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 public class FuelTypeService implements IFuelTypeService {
 
     private final IFuelTypeRepository _fuelTypeRepository;
+    @Autowired
+    CarClient _carClient;
 
     public FuelTypeService(IFuelTypeRepository fuelTypeRepository) {
         _fuelTypeRepository = fuelTypeRepository;
@@ -64,6 +68,13 @@ public class FuelTypeService implements IFuelTypeService {
         fuelType.setType(request.getType());
         fuelType.setTankCapacity(request.getTankCapacity());
         FuelType savedFuelType = _fuelTypeRepository.save(fuelType);
+        //SOAP poziv cuvanje u MS bazi
+        com.example.monolitna.soap.wsdl.FuelType f = new com.example.monolitna.soap.wsdl.FuelType();
+        f.setId(savedFuelType.getId());
+        f.setTankCapacity(savedFuelType.getTankCapacity());
+        f.setType(savedFuelType.getType());
+        _carClient.createFuelType(f);
+        System.out.println("Vration sam se iz ms");
         return mapFuelTypetoFuelTypeResponse(savedFuelType);
     }
 
