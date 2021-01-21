@@ -1,6 +1,7 @@
 package com.example.monolitna.entity;
 
 
+import com.example.monolitna.util.enums.ReservationStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,4 +26,7 @@ public class Bundle {
 
     @Column(name = "publisher_id")
     private Long publisherId;
+
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 }

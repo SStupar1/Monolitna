@@ -29,4 +29,7 @@ public class Pricelist {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "discount_id", referencedColumnName = "id")
     private Discount discount;
+
+    @OneToMany(mappedBy = "pricelist", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Ad> ads;
 }

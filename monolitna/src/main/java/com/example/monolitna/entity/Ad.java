@@ -33,9 +33,8 @@ public class Ad {
 
     private LocalDate creationDate; //datum kada je oglas napravljen
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agent_id", referencedColumnName = "id")
-    private Agent agent;
+    @Column(name = "publisher_id")
+    private Long publisherId;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
@@ -50,10 +49,15 @@ public class Ad {
     @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Reservation> reservations;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pricelist_id", referencedColumnName = "id")
     private Pricelist pricelist;
 
     private boolean simpleUser;
+
+
 
 }

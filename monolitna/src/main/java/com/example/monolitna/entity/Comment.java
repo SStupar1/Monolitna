@@ -19,10 +19,10 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String comment;
+    private String content;
 
-    @Column(name = "publisher_id")
-    private Long publisherId;
+    @Column(name = "customer_id")
+    private Long customerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ad_id")

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class Agent{
 
     private String pib;
 
-    private Date dateFounded;
+    private LocalDate dateFounded;
 
     private String bankAccountNumber;
 
@@ -35,8 +36,8 @@ public class Agent{
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Ad> ad;
+    //@OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    //private Set<Ad> ad;
 
 
 }

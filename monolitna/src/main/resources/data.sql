@@ -24,7 +24,7 @@ insert into authorities_permissions (authority_id, permission_id) values
 (9, 1);
 
 insert into user_entity (id, username, password, has_signed_in, last_password_reset_date, user_role) values
-(1, 'admin@gmail.com', '$2y$10$UFTyoDVYFFUqlb0lnKfoKe7H/EbQOqZH.ZYHf6sOYiOWSRCmpcJ5K', false, '2020-01-01 10:10:11', 2),
+(1, 'admin@gmail.com', '$2a$10$UJEbOrAMWN/bh8tEPHt.Z.fD2RX.T0e0MXNuZEFCEFTNAjHkdAVju', false, '2020-01-01 10:10:11', 2),
 (2, 'agent@gmail.com', '$2a$10$zQU7XEdDSMvxt13Xkjs3X.CCY64edvCS0ZXcgqPtU8FhSYVUhtnau', false, '2020-01-01 10:10:12', 1),
 (3, 'agent1@gmail.com', '$2a$10$zQU7XEdDSMvxt13Xkjs3X.CCY64edvCS0ZXcgqPtU8FhSYVUhtnau', false, '2020-01-01 10:10:13', 1),
 (4, 'customer@gmail.com', '$2a$10$UJEbOrAMWN/bh8tEPHt.Z.fD2RX.T0e0MXNuZEFCEFTNAjHkdAVju', false, '2020-01-01 10:10:14', 0),
@@ -129,14 +129,13 @@ insert into car(id, km_traveled, car_model_id, fuel_type_id, gearshift_type_id) 
 (10, 30000, 14, 8, 1);
 
 insert into discount(id, discount) values
-(1, 10),
-(2, 15);
+(1, 0),(2, 10),(3, 20), (4, 30), (5, 40), (6, 50), (7, 60), (8, 70), (9, 80), (10, 90);
 
 insert into pricelist(id, price_per_day, price_per_kilometer, price_cdw, discount_id) values
 (1, 10, 1, 0, 1),
-(2, 15, 2, 10, 2);
+(2, 15, 2, 10, 3);
 
-insert into ad(id, agent_id ,car_id, limited_distance, limited_km, cdw, seats, creation_date, simple_user, name, pricelist_id) values
+insert into ad(id, publisher_id ,car_id, limited_distance, limited_km, cdw, seats, creation_date, simple_user, name, pricelist_id) values
 (1, 1, 1, false, 0, false, 4, '2020-07-08', true, 'BMW X1 Crossover',1 ),
 (2, 1, 3, false, 0, true, 2, '2020-01-08', false, 'BMW Series5 Sedan', 1),
 (3, 1, 5, false, 0, true, 3, '2020-11-23', false, 'Honda Civic Sedan', 1),
@@ -162,3 +161,8 @@ insert into reservation (id, from_date, to_date, from_time, to_time, customer_id
 (8, '2021-03-19', '2021-03-21', '20:00', '20:00', 2, 6, 'PENDING', true, null),
 (9, '2021-03-22', '2021-03-23', '20:00', '20:00', 2, 7, 'PENDING', true, null),
 (10, '2021-04-13', '2021-05-15', '20:00', '20:00', 2, 4, 'PENDING', false, null);
+
+insert into comment(id, content, customer_id, simple_user, ad_id, status) values
+(1, "Prvi komentar", 2, true, 1, 'PENDING'),
+(2, "Drugi komentar", 1, true, 1, 'PENDING'),
+(3, "Treci komentar", 4, false, 1, 'DENIED');
